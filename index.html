@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexTech Development</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #007acc;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links li {
+            margin-right: 20px;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .nav-buttons {
+            display: flex;
+        }
+        .nav-buttons a {
+            margin-left: 10px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .login-btn {
+            background-color: #555;
+        }
+        .signup-btn {
+            background-color: #007acc;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff6600;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .feature {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .feature h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .feature p {
+            font-size: 16px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+        /* Styles for the chatbot */
+        .chatbot-container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 300px;
+            padding: 10px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: none;
+            font-size: 14px;
+        }
+        .chatbot-header {
+            font-size: 16px;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        .chatbot-messages {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .chatbot-message {
+            margin: 5px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .chatbot-message.bot {
+            align-items: flex-start;
+        }
+        .chatbot-message.user {
+            align-items: flex-end;
+        }
+        .chatbot-message img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        .chatbot-bubble {
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 12px;
+            max-width: 70%;
+            word-wrap: break-word;
+            position: relative;
+        }
+        .chatbot-bubble.grey {
+            background-color: #ddd;
+            color: #333;
+        }
+        .chatbot-timestamp {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+            text-align: right;
+        }
+        .chatbot-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        .chatbot-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .chatbot-button:hover {
+            background-color: #0056b3;
+        }
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .typing-indicator {
+            font-style: italic;
+            color: #007bff;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-links">
+                <a href="product.html">Products</a>
+                <a href="developers.html">Developers</a>
+                <a href="company.html">Company</a>
+                <a href="support.html">Support</a>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            </div>
+            <div class="nav-buttons">
+                <a href="login.html" class="login-btn">Login</a>
+                <a href="signup.html" class="signup-btn">Sign Up</a>
+            </div>
+        </nav>
+        <div class="container">
+            <h1>Welcome to NexTech Development</h1>
+            <p>Your partner in Roblox game development and cutting-edge tech solutions.</p>
+            <p>We are a Team we Bring the Future for a Better tomorrow!</p>
+            <a href="product.html" class="cta-button">Explore Our Products</a>
+        </div>
+    </header>
+    <div class="container">
+        <div class="features">
+            <div class="feature">
+                <h2>Roblox Expertise</h2>
+                <p>Our team of experienced Roblox developers is here to assist you with game design, scripting, and optimization. Our team is dedicated to revolutionizing the world of Roblox gaming with our cutting-edge products and services.</p>
+            </div>
+            <div class="feature">
+                <h2>Powerful Tools</h2>
+                <p>Discover our suite of tools, plugins, and assets designed to enhance your Roblox projects.</p>
+            </div>
+            <div class="feature">
+                <h2>Community Support</h2>
+                <p>Join our community forums, server, and events to connect with fellow developers and our team and learn from the best.</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© 2024 NexTech Development. All rights reserved.</p>
+    </footer>
+
+    <div class="chatbot-container" id="chatbot">
+        <div class="chatbot-header">Pod Smart</div>
+        <div id="chatbot-messages" class="chatbot-messages">
+            <!-- Typing indicator initially hidden -->
+            <div id="typing-indicator" class="typing-indicator" style="display: none;">Bot is typing...</div>
+        </div>
+        <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Type your message...">
+        <button id="chatbot-button" class="chatbot-button">Send</button>
+    </div>
+    
+    <button class="chatbot-toggle" id="chatbot-toggle">💬</button>
+    
+    <script>
+        function getCurrentTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+
+        document.getElementById('chatbot-toggle').addEventListener('click', function() {
+            const chatbot = document.getElementById('chatbot');
+            if (chatbot.style.display === 'none' || chatbot.style.display === '') {
+                chatbot.style.display = 'block';
+            } else {
+                chatbot.style.display = 'none';
+            }
+        });
+
+        document.getElementById('chatbot-button').addEventListener('click', function() {
+            const userMessage = document.getElementById('chatbot-input').value;
+            if (userMessage) {
+                const messagesContainer = document.getElementById('chatbot-messages');
+                const typingIndicator = document.getElementById('typing-indicator');
+
+                // Display user's message
+                const userMessageDiv = document.createElement('div');
+                userMessageDiv.classList.add('chatbot-message', 'user');
+                const userMessageBubble = document.createElement('div');
+                userMessageBubble.classList.add('chatbot-bubble');
+                userMessageBubble.textContent = userMessage;
+                userMessageDiv.appendChild(userMessageBubble);
+                const userTimestamp = document.createElement('div');
+                userTimestamp.classList.add('chatbot-timestamp');
+                userTimestamp.textContent = getCurrentTime();
+                userMessageDiv.appendChild(userTimestamp);
+                messagesContainer.appendChild(userMessageDiv);
+                
+                // Clear input field
+                document.getElementById('chatbot-input').value = '';
+
+                // Show typing indicator
+                typingIndicator.style.display = 'block';
+                messagesContainer.appendChild(typingIndicator);
+
+                // Scroll to bottom of chat
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                
+                // After 20 seconds, replace typing indicator with bot's response
+                setTimeout(() => {
+                    typingIndicator.style.display = 'none'; // Hide typing indicator
+
+                    // First bot message
+                    const botMessageDiv = document.createElement('div');
+                    botMessageDiv.classList.add('chatbot-message', 'bot');
+                    const botMessageBubble = document.createElement('div');
+                    botMessageBubble.classList.add('chatbot-bubble', 'grey');
+                    botMessageBubble.textContent = "Pod Smart is in development. To seek help, go to the support page or login or sign up to the NexTech Portal. Thank you! NTD Web Staff";
+                    botMessageDiv.appendChild(botMessageBubble);
+                    const botTimestamp = document.createElement('div');
+                    botTimestamp.classList.add('chatbot-timestamp');
+                    botTimestamp.textContent = getCurrentTime();
+                    botMessageDiv.appendChild(botTimestamp);
+                    messagesContainer.appendChild(botMessageDiv);
+
+                    // Scroll to bottom of chat
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                    // After an additional 10 seconds, send the follow-up message with links
+                    setTimeout(() => {
+                        const followUpDiv = document.createElement('div');
+                        followUpDiv.classList.add('chatbot-message', 'bot');
+                        const followUpBubble = document.createElement('div');
+                        followUpBubble.classList.add('chatbot-bubble', 'grey');
+                        followUpBubble.innerHTML = `
+                            Here are some links that may help. I do suggest you speak to a human staff member via Discord ticket. Thank you! :)<br><br>
+                            <a href="https://futures-organization-1.gitbook.io/nextechs-development-support" target="_blank">Support Page</a><br>
+                            <a href="https://discord.gg/KZzZKWkmWZ" target="_blank">Discord</a><br>
+                            <a href="https://www.roblox.com/groups/11146129/F-T-D-NexTech-Development#!/about" target="_blank">Roblox Group</a>
+                        `;
+                        followUpDiv.appendChild(followUpBubble);
+                        const followUpTimestamp = document.createElement('div');
+                        followUpTimestamp.classList.add('chatbot-timestamp');
+                        followUpTimestamp.textContent = getCurrentTime();
+                        followUpDiv.appendChild(followUpTimestamp);
+                        messagesContainer.appendChild(followUpDiv);
+
+                        // Scroll to bottom of chat
+                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    }, 10000); // 10 seconds delay for the follow-up message
+                }, 20000); // 20 seconds delay for the initial response
+            }
+        });
+    </script>
+</body>
+</html>

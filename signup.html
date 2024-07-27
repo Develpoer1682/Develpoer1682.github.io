@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - NexTech Development</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .signup-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .signup-container h1 {
+            margin-bottom: 20px;
+        }
+        .signup-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .signup-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007acc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .signup-container button:hover {
+            background-color: #005f99;
+        }
+        .signup-container a {
+            display: block;
+            margin-top: 10px;
+            color: #007acc;
+            text-decoration: none;
+        }
+        .signup-container a:hover {
+            text-decoration: underline;
+        }
+        .confirmation-message {
+            margin-top: 20px;
+            color: #007acc;
+            font-size: 18px;
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>Sign Up</h1>
+        <input type="text" id="signup-username" placeholder="Username" required>
+        <input type="email" id="signup-email" placeholder="Email" required>
+        <input type="password" id="signup-password" placeholder="Password" required>
+        <button type="submit" id="signup-button">Sign Up</button>
+        <a href="login.html">Already have an account? Log In</a>
+        <div id="confirmation-message" class="confirmation-message">
+            Pod Smart sent a copy of your sign-up info to the email you provided.
+        </div>
+    </div>
+    <script>
+        document.getElementById('signup-button').addEventListener('click', function () {
+            const username = document.getElementById('signup-username').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value;
+
+            // Basic validation
+            if (username && email && password) {
+                // Redirect to welcome page with username as URL parameter
+                window.location.href = `welcome.html?name=${encodeURIComponent(username)}`;
+
+                // Send email with sign-up info
+                sendSignUpEmail(username, email);
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+
+        function sendSignUpEmail(username, email) {
+            fetch('send-email.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('confirmation-message').style.display = 'block';
+                } else {
+                    console.error('Failed to send sign-up info.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
+
+
